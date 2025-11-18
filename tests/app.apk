@@ -1,0 +1,14 @@
+PLACEHOLDER APK FILE
+
+This is a placeholder file. Replace this with your actual Android APK file.
+
+To get a real APK:
+1. Build your Android app using Android Studio or Gradle
+2. Download an APK from your app's release or build artifacts
+3. Place the actual APK file here: tests/app.apk
+
+For testing purposes, you can also use demo APKs:
+- ApiDemos-debug.apk from Android SDK samples
+- Any open-source Android app APK
+
+Make sure the APK is compatible with your target Android device/emulator.
