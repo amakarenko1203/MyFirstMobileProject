@@ -15,7 +15,10 @@ test.describe('API Demos - Accessibility Custom View Test', () => {
         'appium:deviceName': 'emulator-5554',
         'appium:automationName': 'UiAutomator2',
         'appium:app': path.resolve(__dirname, 'app.apk'),
-        'appium:appWaitActivity': '.ApiDemos'
+        'appium:appWaitActivity': '.ApiDemos',
+        'appium:skipServerInstallation': true,
+        'appium:skipDeviceInitialization': true,
+        'appium:ignoreHiddenApiPolicyError': true
       }
     });
 

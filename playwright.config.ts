@@ -27,6 +27,7 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+<<<<<<< Updated upstream
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
@@ -37,6 +38,10 @@ export default defineConfig({
     {
       name: 'Mobile Safari',
       use: { ...devices['iPhone 12'] },
+=======
+      name: 'Mobile Tests',
+      testMatch: '**/*.spec.ts',
+>>>>>>> Stashed changes
     },
   ],
 

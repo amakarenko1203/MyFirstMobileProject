@@ -8,7 +8,13 @@
     "strict": false,
     "skipLibCheck": true,
     "resolveJsonModule": true,
+<<<<<<< Updated upstream
     "types": ["node", "@wdio/globals/types", "mocha"]
+=======
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "types": ["node", "@wdio/globals/types"]
+>>>>>>> Stashed changes
   },
   "include": [
     "tests/**/*.ts",
