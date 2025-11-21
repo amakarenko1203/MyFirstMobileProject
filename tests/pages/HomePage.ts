@@ -1,27 +1,29 @@
-import type { Browser } from 'webdriverio';
+import { BasePage } from './BasePage';
 
-export class HomePage {
-  private driver: Browser;
+/**
+ * Home Page Object
+ * Represents the main screen of API Demos app
+ */
+class HomePage extends BasePage {
+    /**
+     * Selectors for elements on Home Page
+     */
+    get contentMenu(): string {
+        return 'android=new UiSelector().text("Content")';
+    }
 
-  constructor(driver: Browser) {
-    this.driver = driver;
-  }
-
-  // Locators
-  private get textMenu() {
-    // Using UiAutomator selector - adjust based on actual element
-    return this.driver.$('android=new UiSelector().text("Text")');
-  }
-
-  // Actions
-  async tapTextMenu() {
-    await this.textMenu.waitForDisplayed({ timeout: 10000 });
-    await this.textMenu.click();
-    console.log('Tapped on Text menu');
-  }
-
-  // Verification methods
-  async isTextMenuVisible() {
-    return await this.textMenu.isDisplayed();
-  }
+    /**
+     * Navigate to Content menu by scrolling to it first
+     */
+    async navigateToContent(): Promise<void> {
+        console.log('Step 2: Scrolling to and tapping Content menu');
+        
+        // Scroll to the Content element
+        await browser.$('android=new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text("Content"))');
+        
+        // Now click it
+        await this.clickElement(this.contentMenu);
+    }
 }
+
+export default new HomePage();
