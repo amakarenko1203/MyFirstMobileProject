@@ -12,7 +12,7 @@ export const config: Options.Testrunner = {
         platformName: 'Android',
         'appium:deviceName': 'emulator-5554',
         'appium:automationName': 'UiAutomator2',
-        'appium:app': path.join(process.cwd(), 'tests', 'app.apk'),
+        'appium:app': path.join(process.cwd(), 'tests', 'ApiDemos.apk'),
         'appium:ensureWebviewsHavePages': true,
         'appium:nativeWebScreenshot': true,
         'appium:newCommandTimeout': 3600,

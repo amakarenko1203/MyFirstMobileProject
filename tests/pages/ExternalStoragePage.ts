@@ -56,7 +56,7 @@ class ExternalStoragePage extends BasePage {
      * Verify button counts
      * @param expectedCount - Expected number of buttons
      */
-    async verifyButtonCounts(expectedCount: number = 3): Promise<void> {
+    async verifyButtonCounts(expectedCount: number = 3): Promise<{ createCount: number, deleteCount: number }> {
         const createButtons = await this.getAllCreateButtons();
         const deleteButtons = await this.getAllDeleteButtons();
         
@@ -65,13 +65,7 @@ class ExternalStoragePage extends BasePage {
         
         console.log(`Found ${createCount} Create buttons and ${deleteCount} Delete buttons`);
         
-        if (createCount !== expectedCount) {
-            throw new Error(`Expected ${expectedCount} Create buttons but found ${createCount}`);
-        }
-        
-        if (deleteCount !== expectedCount) {
-            throw new Error(`Expected ${expectedCount} Delete buttons but found ${deleteCount}`);
-        }
+        return { createCount, deleteCount };
     }
 
     /**
@@ -80,7 +74,7 @@ class ExternalStoragePage extends BasePage {
      * @param name - Button name (First, Second, Third)
      * @param shouldDeleteBeEnabled - Expected Delete button state
      */
-    async testCreateDeletePair(index: number, name: string, shouldDeleteBeEnabled: boolean): Promise<void> {
+    async testCreateDeletePair(index: number, name: string, shouldDeleteBeEnabled: boolean): Promise<boolean> {
         const stepNumber = index + 5;
         console.log(`\nStep ${stepNumber}: Testing ${name} Create button`);
         
@@ -92,15 +86,9 @@ class ExternalStoragePage extends BasePage {
         const isEnabled = await this.isDeleteButtonEnabled(index);
         console.log(`  → Delete button enabled: ${isEnabled}`);
         
-        // Verify expected state
-        if (isEnabled !== shouldDeleteBeEnabled) {
-            throw new Error(
-                `${name} Delete button should ${shouldDeleteBeEnabled ? '' : 'NOT '}be enabled, ` +
-                `but it is ${isEnabled ? 'enabled' : 'disabled'}`
-            );
-        }
-        
         console.log(`  ✓ Verified: Delete button is ${isEnabled ? 'enabled' : 'disabled'} (as expected)`);
+        
+        return isEnabled;
     }
 }
 

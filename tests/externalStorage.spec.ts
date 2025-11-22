@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { expect } from '@playwright/test';
 import HomePage from './pages/HomePage';
 import StoragePage from './pages/StoragePage';
 import ExternalStoragePage from './pages/ExternalStoragePage';
@@ -24,16 +24,21 @@ describe('API Demos - External Storage Test', () => {
         await StoragePage.navigateToExternalStorage();
 
         // Verify we have 3 Create and 3 Delete buttons
-        await ExternalStoragePage.verifyButtonCounts(3);
+        const { createCount, deleteCount } = await ExternalStoragePage.verifyButtonCounts(3);
+        expect(createCount).toBe(3);
+        expect(deleteCount).toBe(3);
 
         // Step 5: Test first Create button - Delete should NOT be enabled
-        await ExternalStoragePage.testCreateDeletePair(0, 'First', false);
+        const firstDeleteEnabled = await ExternalStoragePage.testCreateDeletePair(0, 'First', false);
+        expect(firstDeleteEnabled).toBe(false);
 
         // Step 6: Test second Create button - Delete should be enabled
-        await ExternalStoragePage.testCreateDeletePair(1, 'Second', true);
+        const secondDeleteEnabled = await ExternalStoragePage.testCreateDeletePair(1, 'Second', true);
+        expect(secondDeleteEnabled).toBe(true);
 
         // Step 7: Test third Create button - Delete should be enabled
-        await ExternalStoragePage.testCreateDeletePair(2, 'Third', true);
+        const thirdDeleteEnabled = await ExternalStoragePage.testCreateDeletePair(2, 'Third', true);
+        expect(thirdDeleteEnabled).toBe(true);
 
         console.log('\n========================================');
         console.log('✓ All verifications passed!');
